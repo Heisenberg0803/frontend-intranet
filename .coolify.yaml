@@ -1,0 +1,10 @@
+services:
+  - name: frontend-intranet
+    type: static
+    git:
+      repo: https://github.com/Heisenberg0803/frontend-intranet
+      branch: main
+    build:
+      install: npm ci
+      build: npm run build
+      publish: dist
