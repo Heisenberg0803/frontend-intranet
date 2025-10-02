@@ -21,7 +21,8 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copia os arquivos buildados para a pasta do nginx
-COPY --from=builder /app/build /usr/share/nginx/html
+# Vite builds to dist/ directory, not build/
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copia uma config simples do nginx (para SPA React funcionar com rotas)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
