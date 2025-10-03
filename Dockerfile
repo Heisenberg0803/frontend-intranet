@@ -32,7 +32,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # Healthcheck para verificar se o container está rodando
-HEALTHCHECK CMD wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1
+HEALTHCHECK --interval=10s --timeout=3s --retries=5 CMD \
+    wget --spider --retry-connrefused -q http://127.0.0.1/ || exit 1
 
 # Comando final
 CMD ["nginx", "-g", "daemon off;"]
